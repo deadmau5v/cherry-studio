@@ -131,6 +131,7 @@ export type Model = {
   owned_by?: string
   description?: string
   type?: ModelType[]
+  maxTokens?: number
 }
 
 export type Suggestion = {

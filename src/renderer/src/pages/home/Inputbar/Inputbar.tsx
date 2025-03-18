@@ -776,7 +776,7 @@ const Inputbar: FC<Props> = ({ assistant: _assistant, setActiveTopic, topic }) =
                 contextCount={contextCount}
                 knowledgeTokenCount={knowledgeTokenCount}
                 ToolbarButton={ToolbarButton}
-                onClick={onNewContext}
+                maxTokens={assistant.settings?.maxTokens || assistant.model?.maxTokens || 64000}
               />
             </ToolbarMenu>
             <ToolbarMenu>

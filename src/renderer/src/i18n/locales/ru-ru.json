@@ -950,6 +950,10 @@
       "moresetting.check.confirm": "Подтвердить выбор",
       "moresetting.check.warn": "Пожалуйста, будьте осторожны при выборе этой опции. Неправильный выбор может привести к сбою в работе модели!",
       "moresetting.warn": "Предупреждение о риске",
+      "models.add.model_name.tooltip": "Дополнительно, например GPT-3.5",
+      "models.max_tokens": "Максимальное количество токенов",
+      "models.max_tokens.placeholder": "Максимальное количество токенов",
+      "models.max_tokens.tooltip": "Максимальное количество токенов для модели",
       "provider": {
         "add.name": "Имя провайдера",
         "add.name.placeholder": "Пример: OpenAI",

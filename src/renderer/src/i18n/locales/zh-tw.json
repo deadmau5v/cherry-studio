@@ -950,6 +950,10 @@
       "moresetting.check.confirm": "確認勾選",
       "moresetting.check.warn": "請謹慎勾選此選項，勾選錯誤會導致模型無法正常使用！！！",
       "moresetting.warn": "風險警告",
+      "models.add.model_name.tooltip": "例如 GPT-3.5",
+      "models.max_tokens": "最大 Token 數",
+      "models.max_tokens.placeholder": "最大 Token 數",
+      "models.max_tokens.tooltip": "模型最大 Token 數",
       "provider": {
         "add.name": "提供者名稱",
         "add.name.placeholder": "例如：OpenAI",

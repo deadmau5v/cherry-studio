@@ -10,7 +10,7 @@ import {
   QuestionCircleOutlined
 } from '@ant-design/icons'
 import TranslateButton from '@renderer/components/TranslateButton'
-import { isFunctionCallingModel, isVisionModel, isWebSearchModel } from '@renderer/config/models'
+import { getMaxContextTokens, isFunctionCallingModel, isVisionModel, isWebSearchModel } from '@renderer/config/models'
 import db from '@renderer/databases'
 import { useAssistant } from '@renderer/hooks/useAssistant'
 import { useMessageOperations } from '@renderer/hooks/useMessageOperations'
@@ -776,7 +776,12 @@ const Inputbar: FC<Props> = ({ assistant: _assistant, setActiveTopic, topic }) =
                 contextCount={contextCount}
                 knowledgeTokenCount={knowledgeTokenCount}
                 ToolbarButton={ToolbarButton}
-                maxTokens={assistant.settings?.maxTokens || assistant.model?.maxTokens || 64000}
+                maxTokens={
+                  // 优先级：对话设置 -> 模型设置 -> 自动获取 -> 默认值
+                  assistant.settings?.enableMaxTokens && assistant.settings?.maxTokens
+                    ? assistant.settings?.maxTokens
+                    : getMaxContextTokens(assistant.model)
+                }
               />
             </ToolbarMenu>
             <ToolbarMenu>

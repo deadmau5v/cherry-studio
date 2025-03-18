@@ -950,6 +950,10 @@
       "moresetting.check.confirm": "Confirm Selection",
       "moresetting.check.warn": "Please be cautious when selecting this option. Incorrect selection may cause the model to malfunction!",
       "moresetting.warn": "Risk Warning",
+      "models.add.model_name.tooltip": "Example: GPT-3.5",
+      "models.max_tokens": "Max Tokens",
+      "models.max_tokens.placeholder": "Max Tokens",
+      "models.max_tokens.tooltip": "Max tokens for the model",
       "provider": {
         "add.name": "Provider Name",
         "add.name.placeholder": "Example: OpenAI",

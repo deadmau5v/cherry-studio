@@ -106,6 +106,7 @@
       "input.expand": "展开",
       "input.file_not_supported": "模型不支持此文件类型",
       "input.knowledge_base": "知识库",
+      "input.knowledge_tokens.tip": "知识库引用 token 数",
       "input.new.context": "清除上下文 {{Command}}",
       "input.new_topic": "新话题 {{Command}}",
       "input.pause": "暂停",

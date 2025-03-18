@@ -106,6 +106,7 @@
       "input.expand": "Развернуть",
       "input.file_not_supported": "Модель не поддерживает этот тип файла",
       "input.knowledge_base": "База знаний",
+      "input.knowledge_tokens.tip": "База знаний токены",
       "input.new.context": "Очистить контекст {{Command}}",
       "input.new_topic": "Новый топик {{Command}}",
       "input.pause": "Остановить",

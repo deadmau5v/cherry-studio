@@ -1,4 +1,4 @@
-import { ArrowUpOutlined, MenuOutlined } from '@ant-design/icons'
+import { ArrowUpOutlined, BookOutlined, MenuOutlined } from '@ant-design/icons'
 import { HStack, VStack } from '@renderer/components/Layout'
 import { useSettings } from '@renderer/hooks/useSettings'
 import { Divider, Popover } from 'antd'
@@ -10,10 +10,11 @@ type Props = {
   estimateTokenCount: number
   inputTokenCount: number
   contextCount: { current: number; max: number }
+  knowledgeTokenCount?: number
   ToolbarButton: any
 } & React.HTMLAttributes<HTMLDivElement>
 
-const TokenCount: FC<Props> = ({ estimateTokenCount, inputTokenCount, contextCount }) => {
+const TokenCount: FC<Props> = ({ estimateTokenCount, inputTokenCount, contextCount, knowledgeTokenCount }) => {
   const { t } = useTranslation()
   const { showInputEstimatedTokens } = useSettings()
 
@@ -40,13 +41,25 @@ const TokenCount: FC<Props> = ({ estimateTokenCount, inputTokenCount, contextCou
   const PopoverContent = () => {
     return (
       <VStack w="185px" background="100%">
+        {/* context count */}
         <HStack justifyContent="space-between" w="100%">
           <Text>{t('chat.input.context_count.tip')}</Text>
           <Text>
             {contextCount.current} / {contextCount.max == 20 ? '∞' : contextCount.max}
           </Text>
         </HStack>
+        {/* knowledge token count */}
+        {knowledgeTokenCount !== undefined && knowledgeTokenCount > 0 && (
+          <>
+            <Divider style={{ margin: '5px 0' }} />
+            <HStack justifyContent="space-between" w="100%">
+              <Text>{t('chat.input.knowledge_tokens.tip')}</Text>
+              <Text>{knowledgeTokenCount}</Text>
+            </HStack>
+          </>
+        )}
         <Divider style={{ margin: '5px 0' }} />
+        {/* estimated token count */}
         <HStack justifyContent="space-between" w="100%">
           <Text>{t('chat.input.estimated_tokens.tip')}</Text>
           <Text>{estimateTokenCount}</Text>
@@ -62,6 +75,13 @@ const TokenCount: FC<Props> = ({ estimateTokenCount, inputTokenCount, contextCou
         <Divider type="vertical" style={{ marginTop: 0, marginLeft: 5, marginRight: 5 }} />
         <ArrowUpOutlined />
         {inputTokenCount} / {estimateTokenCount}
+        {knowledgeTokenCount !== undefined && knowledgeTokenCount > 0 && (
+          <>
+            <Divider type="vertical" style={{ marginTop: 0, marginLeft: 5, marginRight: 5 }} />
+            <BookOutlined />
+            {knowledgeTokenCount}
+          </>
+        )}
       </Popover>
     </Container>
   )

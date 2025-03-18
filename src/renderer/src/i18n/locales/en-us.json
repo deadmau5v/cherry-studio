@@ -106,6 +106,7 @@
       "input.expand": "Expand",
       "input.file_not_supported": "Model does not support this file type",
       "input.knowledge_base": "Knowledge Base",
+      "input.knowledge_tokens.tip": "Knowledge base tokens",
       "input.new.context": "Clear Context {{Command}}",
       "input.new_topic": "New Topic {{Command}}",
       "input.pause": "Pause",

@@ -106,6 +106,7 @@
       "input.expand": "展開",
       "input.file_not_supported": "モデルはこのファイルタイプをサポートしません",
       "input.knowledge_base": "ナレッジベース",
+      "input.knowledge_tokens.tip": "ナレッジベースのトークン数",
       "input.new.context": "コンテキストをクリア {{Command}}",
       "input.new_topic": "新しいトピック {{Command}}",
       "input.pause": "一時停止",

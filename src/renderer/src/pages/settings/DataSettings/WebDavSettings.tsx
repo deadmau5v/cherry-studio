@@ -1,4 +1,4 @@
-import { FolderOpenOutlined, SaveOutlined, SyncOutlined } from '@ant-design/icons'
+import { FolderOpenOutlined, SaveOutlined, SyncOutlined, WarningOutlined } from '@ant-design/icons'
 import { HStack } from '@renderer/components/Layout'
 import { useTheme } from '@renderer/context/ThemeProvider'
 import { useSettings } from '@renderer/hooks/useSettings'
@@ -12,7 +12,7 @@ import {
   setWebdavSyncInterval as _setWebdavSyncInterval,
   setWebdavUser as _setWebdavUser
 } from '@renderer/store/settings'
-import { Button, Input, Select } from 'antd'
+import { Button, Input, Select, Tooltip } from 'antd'
 import dayjs from 'dayjs'
 import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -98,14 +98,14 @@ const WebDavSettings: FC = () => {
     return (
       <HStack gap="5px" alignItems="center">
         {webdavSync.syncing && <SyncOutlined spin />}
+        {!webdavSync.syncing && webdavSync.lastSyncError && (
+          <Tooltip title={`${t('settings.data.webdav.syncError')}: ${webdavSync.lastSyncError}`}>
+            <WarningOutlined style={{ color: 'red' }} />
+          </Tooltip>
+        )}
         {webdavSync.lastSyncTime && (
           <span style={{ color: 'var(--text-secondary)' }}>
             {t('settings.data.webdav.lastSync')}: {dayjs(webdavSync.lastSyncTime).format('HH:mm:ss')}
-          </span>
-        )}
-        {webdavSync.lastSyncError && (
-          <span style={{ color: 'var(--error-color)' }}>
-            {t('settings.data.webdav.syncError')}: {webdavSync.lastSyncError}
           </span>
         )}
       </HStack>

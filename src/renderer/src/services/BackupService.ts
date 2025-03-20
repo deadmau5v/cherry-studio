@@ -88,17 +88,16 @@ export async function backupToWebdav({ showMessage = false }: { showMessage?: bo
       )
       showMessage && window.message.success({ content: i18n.t('message.backup.success'), key: 'backup' })
     } else {
-      store.dispatch(setWebDAVSyncState({ lastSyncError: 'Backup failed' }))
-      showMessage && window.message.error({ content: i18n.t('message.backup.failed'), key: 'backup' })
+      store.dispatch(setWebDAVSyncState({ lastSyncTime: Date.now(), lastSyncError: 'Backup failed' }))
+      window.message.error({ content: i18n.t('message.backup.failed'), key: 'backup' })
     }
   } catch (error: any) {
-    store.dispatch(setWebDAVSyncState({ lastSyncError: error.message }))
+    store.dispatch(setWebDAVSyncState({ lastSyncTime: Date.now(), lastSyncError: error.message }))
     console.error('[Backup] backupToWebdav: Error uploading file to WebDAV:', error)
-    showMessage &&
-      window.modal.error({
-        title: i18n.t('message.backup.failed'),
-        content: error.message
-      })
+    window.modal.error({
+      title: i18n.t('message.backup.failed'),
+      content: error.message
+    })
   } finally {
     store.dispatch(setWebDAVSyncState({ syncing: false }))
     isManualBackupRunning = false

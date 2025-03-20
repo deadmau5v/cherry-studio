@@ -920,6 +920,8 @@
         "jsonSaveError": "保存JSON配置失敗"
       },
       "messages.divider": "訊息間顯示分隔線",
+      "messages.pagination_buttons": "顯示分頁按鈕",
+      "messages.message_line": "顯示訊息線",
       "messages.grid_columns": "訊息網格展示列數",
       "messages.grid_popover_trigger": "網格詳細資訊觸發",
       "messages.grid_popover_trigger.click": "點選顯示",

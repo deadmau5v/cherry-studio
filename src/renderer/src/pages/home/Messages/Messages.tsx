@@ -27,6 +27,7 @@ import styled from 'styled-components'
 
 import ChatNavigation from './ChatNavigation'
 import MessageGroup from './MessageGroup'
+import MessageLine from './MessageLine'
 import NarrowLayout from './NarrowLayout'
 import NewTopicButton from './NewTopicButton'
 import Prompt from './Prompt'
@@ -39,7 +40,7 @@ interface MessagesProps {
 
 const Messages: React.FC<MessagesProps> = ({ assistant, topic, setActiveTopic }) => {
   const { t } = useTranslation()
-  const { showTopics, topicPosition, showAssistants } = useSettings()
+  const { showTopics, topicPosition, showAssistants, showPaginationButtons, showMessageLine } = useSettings()
   const { updateTopic, addTopic } = useAssistant(assistant.id)
   const dispatch = useAppDispatch()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -225,7 +226,10 @@ const Messages: React.FC<MessagesProps> = ({ assistant, topic, setActiveTopic })
         </InfiniteScroll>
         <Prompt assistant={assistant} key={assistant.prompt} topic={topic} />
       </NarrowLayout>
-      <ChatNavigation containerId="messages" />
+
+      {showMessageLine && <MessageLine messages={displayMessages} />}
+
+      {showPaginationButtons && <ChatNavigation containerId="messages" />}
     </Container>
   )
 }

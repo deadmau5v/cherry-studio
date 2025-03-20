@@ -772,6 +772,11 @@ const migrateConfig = {
   '81': (state: RootState) => {
     addProvider(state, 'copilot')
     return state
+  },
+  '82': (state: RootState) => {
+    state.settings.showPaginationButtons = true
+    state.settings.showMessageLine = false
+    return state
   }
 }
 

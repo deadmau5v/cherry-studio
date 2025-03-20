@@ -1,10 +1,9 @@
 import { FolderOpenOutlined, SaveOutlined, SyncOutlined } from '@ant-design/icons'
 import { HStack } from '@renderer/components/Layout'
 import { useTheme } from '@renderer/context/ThemeProvider'
-import { useRuntime } from '@renderer/hooks/useRuntime'
 import { useSettings } from '@renderer/hooks/useSettings'
 import { backupToWebdav, restoreFromWebdav, startAutoSync, stopAutoSync } from '@renderer/services/BackupService'
-import { useAppDispatch } from '@renderer/store'
+import { useAppDispatch, useAppSelector } from '@renderer/store'
 import {
   setWebdavAutoSync,
   setWebdavHost as _setWebdavHost,
@@ -44,7 +43,7 @@ const WebDavSettings: FC = () => {
 
   const { t } = useTranslation()
 
-  const { webdavSync } = useRuntime()
+  const { webdavSync } = useAppSelector((state) => state.backup)
 
   // 把之前备份的文件定时上传到 webdav，首先先配置 webdav 的 host, port, user, pass, path
 

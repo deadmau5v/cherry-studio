@@ -1,7 +1,7 @@
 import db from '@renderer/databases'
 import i18n from '@renderer/i18n'
 import store from '@renderer/store'
-import { setWebDAVSyncState } from '@renderer/store/runtime'
+import { setWebDAVSyncState } from '@renderer/store/backup'
 import dayjs from 'dayjs'
 
 export async function backup() {

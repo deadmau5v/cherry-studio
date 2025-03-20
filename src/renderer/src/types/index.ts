@@ -272,6 +272,8 @@ export type KnowledgeBaseParams = {
   baseURL: string
   chunkSize?: number
   chunkOverlap?: number
+  rerankApiKey?: string
+  rerankBaseURL?: string
   rerankModel?: string
   rerankModelProvider?: string
   topN?: number

@@ -93,7 +93,7 @@ export async function backupToWebdav({ showMessage = false }: { showMessage?: bo
     }
   } catch (error: any) {
     store.dispatch(setWebDAVSyncState({ lastSyncError: error.message }))
-    console.error('[backup] backupToWebdav: Error uploading file to WebDAV:', error)
+    console.error('[Backup] backupToWebdav: Error uploading file to WebDAV:', error)
     showMessage &&
       window.modal.error({
         title: i18n.t('message.backup.failed'),
@@ -113,7 +113,7 @@ export async function restoreFromWebdav() {
   try {
     data = await window.api.backup.restoreFromWebdav({ webdavHost, webdavUser, webdavPass, webdavPath })
   } catch (error: any) {
-    console.error('[backup] restoreFromWebdav: Error downloading file from WebDAV:', error)
+    console.error('[Backup] restoreFromWebdav: Error downloading file from WebDAV:', error)
     window.modal.error({
       title: i18n.t('message.restore.failed'),
       content: error.message
@@ -123,7 +123,7 @@ export async function restoreFromWebdav() {
   try {
     await handleData(JSON.parse(data))
   } catch (error) {
-    console.error('[backup] Error downloading file from WebDAV:', error)
+    console.error('[Backup] Error downloading file from WebDAV:', error)
     window.message.error({ content: i18n.t('error.backup.file_format'), key: 'restore' })
   }
 }
@@ -158,6 +158,7 @@ export function startAutoSync() {
     }
 
     const { webdavSyncInterval } = store.getState().settings
+    const { webdavSync } = store.getState().backup
 
     if (webdavSyncInterval <= 0) {
       console.log('[AutoSync] Invalid sync interval, auto sync disabled')
@@ -165,9 +166,21 @@ export function startAutoSync() {
       return
     }
 
-    syncTimeout = setTimeout(performAutoBackup, webdavSyncInterval * 60 * 1000)
+    // 用户指定的自动备份时间间隔（毫秒）
+    const requiredInterval = webdavSyncInterval * 60 * 1000
 
-    console.log(`[AutoSync] Next sync scheduled in ${webdavSyncInterval} minutes`)
+    // 如果存在最后一次同步WebDAV的时间，以它为参考计算下一次同步的时间
+    const timeUntilNextSync = webdavSync?.lastSyncTime
+      ? Math.max(1000, webdavSync.lastSyncTime + requiredInterval - Date.now())
+      : requiredInterval
+
+    syncTimeout = setTimeout(performAutoBackup, timeUntilNextSync)
+
+    console.log(
+      `[AutoSync] Next sync scheduled in ${Math.floor(timeUntilNextSync / 1000 / 60)} minutes ${Math.floor(
+        (timeUntilNextSync / 1000) % 60
+      )} seconds`
+    )
   }
 
   async function performAutoBackup() {
@@ -179,7 +192,7 @@ export function startAutoSync() {
 
     isAutoBackupRunning = true
     try {
-      console.log('[AutoSync] Performing auto backup...')
+      console.log('[AutoSync] Starting auto backup...')
       await backupToWebdav({ showMessage: false })
     } catch (error) {
       console.error('[AutoSync] Auto backup failed:', error)

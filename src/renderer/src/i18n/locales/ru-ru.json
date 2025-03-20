@@ -921,7 +921,7 @@
       },
       "messages.divider": "Показывать разделитель между сообщениями",
       "messages.pagination_buttons": "Показывать кнопки пагинации",
-      "messages.message_line": "Показывать линию сообщений",
+      "messages.message_anchor": "Показывать диалог анкор",
       "messages.grid_columns": "Количество столбцов сетки сообщений",
       "messages.grid_popover_trigger": "Триггер для отображения подробной информации в сетке",
       "messages.grid_popover_trigger.click": "Нажатие для отображения",

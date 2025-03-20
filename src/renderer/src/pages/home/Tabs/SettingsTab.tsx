@@ -31,7 +31,7 @@ import {
   setRenderInputMessageAsMarkdown,
   setShowInputEstimatedTokens,
   setShowMessageDivider,
-  setShowMessageLine,
+  setShowMessageAnchor,
   setShowPaginationButtons,
   setThoughtAutoCollapse
 } from '@renderer/store/settings'
@@ -80,7 +80,7 @@ const SettingsTab: FC<Props> = (props) => {
     multiModelMessageStyle,
     thoughtAutoCollapse,
     showPaginationButtons,
-    showMessageLine
+    showMessageAnchor
   } = useSettings()
 
   const onUpdateAssistantSettings = (settings: Partial<AssistantSettings>) => {
@@ -301,11 +301,11 @@ const SettingsTab: FC<Props> = (props) => {
         </SettingRow>
         <SettingDivider />
         <SettingRow>
-          <SettingRowTitleSmall>{t('settings.messages.message_line')}</SettingRowTitleSmall>
+          <SettingRowTitleSmall>{t('settings.messages.message_anchor')}</SettingRowTitleSmall>
           <Switch
             size="small"
-            checked={showMessageLine}
-            onChange={(checked) => dispatch(setShowMessageLine(checked))}
+            checked={showMessageAnchor}
+            onChange={(checked) => dispatch(setShowMessageAnchor(checked))}
           />
         </SettingRow>
         <SettingDivider />

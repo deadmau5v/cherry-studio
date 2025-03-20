@@ -921,7 +921,7 @@
       },
       "messages.divider": "メッセージ間に区切り線を表示",
       "messages.pagination_buttons": "ページネーションボタンを表示",
-      "messages.message_line": "メッセージ線を表示",
+      "messages.message_anchor": "会話アンカーを表示",
       "messages.grid_columns": "メッセージグリッドの表示列数",
       "messages.grid_popover_trigger": "グリッド詳細トリガー",
       "messages.grid_popover_trigger.click": "クリックで表示",

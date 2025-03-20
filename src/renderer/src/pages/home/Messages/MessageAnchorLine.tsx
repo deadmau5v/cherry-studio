@@ -22,7 +22,7 @@ const getAvatarSource = (isLocalAi: boolean, modelId: string | undefined) => {
   return modelId ? getModelLogo(modelId) : undefined
 }
 
-const MessageLine: FC<MessageLineProps> = ({ messages }) => {
+const MessageAnchorLine: FC<MessageLineProps> = ({ messages }) => {
   const { t } = useTranslation()
   const avatar = useAvatar()
   const { theme } = useTheme()
@@ -282,4 +282,4 @@ const EmojiAvatar = styled.div<{ size: number }>`
   border: 0.5px solid var(--color-border);
 `
 
-export default MessageLine
+export default MessageAnchorLine

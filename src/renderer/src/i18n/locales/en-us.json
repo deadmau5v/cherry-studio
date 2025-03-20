@@ -921,7 +921,7 @@
       },
       "messages.divider": "Show divider between messages",
       "messages.pagination_buttons": "Show pagination buttons",
-      "messages.message_line": "Show message line",
+      "messages.message_anchor": "Show message anchor",
       "messages.grid_columns": "Message grid display columns",
       "messages.grid_popover_trigger": "Grid detail trigger",
       "messages.grid_popover_trigger.click": "Click to display",

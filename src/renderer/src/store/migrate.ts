@@ -775,7 +775,7 @@ const migrateConfig = {
   },
   '82': (state: RootState) => {
     state.settings.showPaginationButtons = true
-    state.settings.showMessageLine = false
+    state.settings.showMessageAnchor = false
     return state
   }
 }

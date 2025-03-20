@@ -27,7 +27,7 @@ import styled from 'styled-components'
 
 import ChatNavigation from './ChatNavigation'
 import MessageGroup from './MessageGroup'
-import MessageLine from './MessageLine'
+import MessageAnchorLine from './MessageAnchorLine'
 import NarrowLayout from './NarrowLayout'
 import NewTopicButton from './NewTopicButton'
 import Prompt from './Prompt'
@@ -40,7 +40,13 @@ interface MessagesProps {
 
 const Messages: React.FC<MessagesProps> = ({ assistant, topic, setActiveTopic }) => {
   const { t } = useTranslation()
-  const { showTopics, topicPosition, showAssistants, showPaginationButtons, showMessageLine } = useSettings()
+  const {
+    showTopics,
+    topicPosition,
+    showAssistants,
+    showPaginationButtons,
+    showMessageAnchor: showMessageLine
+  } = useSettings()
   const { updateTopic, addTopic } = useAssistant(assistant.id)
   const dispatch = useAppDispatch()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -227,7 +233,7 @@ const Messages: React.FC<MessagesProps> = ({ assistant, topic, setActiveTopic })
         <Prompt assistant={assistant} key={assistant.prompt} topic={topic} />
       </NarrowLayout>
 
-      {showMessageLine && <MessageLine messages={displayMessages} />}
+      {showMessageLine && <MessageAnchorLine messages={displayMessages} />}
 
       {showPaginationButtons && <ChatNavigation containerId="messages" />}
     </Container>

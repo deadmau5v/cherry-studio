@@ -48,6 +48,8 @@ export interface SettingsState {
   codeStyle: CodeStyleVarious
   gridColumns: number
   gridPopoverTrigger: 'hover' | 'click'
+  showPaginationButtons: boolean
+  showMessageAnchor: boolean
   // webdav 配置 host, user, pass, path
   webdavHost: string
   webdavUser: string
@@ -122,6 +124,8 @@ const initialState: SettingsState = {
   codeStyle: 'auto',
   gridColumns: 2,
   gridPopoverTrigger: 'hover',
+  showPaginationButtons: true,
+  showMessageAnchor: false,
   webdavHost: '',
   webdavUser: '',
   webdavPass: '',
@@ -363,6 +367,12 @@ const settingsSlice = createSlice({
     },
     setJoplinUrl: (state, action: PayloadAction<string>) => {
       state.joplinUrl = action.payload
+    },
+    setShowPaginationButtons: (state, action: PayloadAction<boolean>) => {
+      state.showPaginationButtons = action.payload
+    },
+    setShowMessageAnchor: (state, action: PayloadAction<boolean>) => {
+      state.showMessageAnchor = action.payload
     }
   }
 })
@@ -432,7 +442,9 @@ export const {
   setObsidianApiKey,
   setObsidianUrl,
   setJoplinToken,
-  setJoplinUrl
+  setJoplinUrl,
+  setShowPaginationButtons,
+  setShowMessageAnchor
 } = settingsSlice.actions
 
 export default settingsSlice.reducer

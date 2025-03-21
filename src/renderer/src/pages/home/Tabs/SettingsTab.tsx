@@ -31,6 +31,8 @@ import {
   setRenderInputMessageAsMarkdown,
   setShowInputEstimatedTokens,
   setShowMessageDivider,
+  setShowMessageAnchor,
+  setShowPaginationButtons,
   setThoughtAutoCollapse
 } from '@renderer/store/settings'
 import { Assistant, AssistantSettings, CodeStyleVarious, ThemeMode, TranslateLanguageVarious } from '@renderer/types'
@@ -76,7 +78,9 @@ const SettingsTab: FC<Props> = (props) => {
     autoTranslateWithSpace,
     pasteLongTextThreshold,
     multiModelMessageStyle,
-    thoughtAutoCollapse
+    thoughtAutoCollapse,
+    showPaginationButtons,
+    showMessageAnchor
   } = useSettings()
 
   const onUpdateAssistantSettings = (settings: Partial<AssistantSettings>) => {
@@ -284,6 +288,24 @@ const SettingsTab: FC<Props> = (props) => {
             size="small"
             checked={showMessageDivider}
             onChange={(checked) => dispatch(setShowMessageDivider(checked))}
+          />
+        </SettingRow>
+        <SettingDivider />
+        <SettingRow>
+          <SettingRowTitleSmall>{t('settings.messages.pagination_buttons')}</SettingRowTitleSmall>
+          <Switch
+            size="small"
+            checked={showPaginationButtons}
+            onChange={(checked) => dispatch(setShowPaginationButtons(checked))}
+          />
+        </SettingRow>
+        <SettingDivider />
+        <SettingRow>
+          <SettingRowTitleSmall>{t('settings.messages.message_anchor')}</SettingRowTitleSmall>
+          <Switch
+            size="small"
+            checked={showMessageAnchor}
+            onChange={(checked) => dispatch(setShowMessageAnchor(checked))}
           />
         </SettingRow>
         <SettingDivider />

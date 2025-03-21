@@ -144,7 +144,7 @@ const messagesSlice = createSlice({
         if (message) {
           Object.assign(message, updates)
           db.topics.update(topicId, {
-            messages: topicMessages.map((m) => (m.id === message.id ? cloneDeep(message) : m))
+            messages: topicMessages.map((m) => (m.id === message.id ? cloneDeep(message) : cloneDeep(m)))
           })
         }
       }

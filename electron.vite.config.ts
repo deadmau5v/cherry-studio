@@ -69,7 +69,27 @@ export default defineConfig({
       }
     },
     optimizeDeps: {
-      exclude: ['chunk-PZ64DZKH.js', 'chunk-JMKENWIY.js', 'chunk-UXYB6GHG.js', 'chunk-ALDIEZMG.js', 'chunk-4X6ZJEXY.js']
+      exclude: [
+        'chunk-PZ64DZKH.js',
+        'chunk-JMKENWIY.js',
+        'chunk-UXYB6GHG.js',
+        'chunk-ALDIEZMG.js',
+        'chunk-4X6ZJEXY.js',
+        'chunk-2LCEAYQV.js',
+        '@llm-tools/embedjs',
+        '@llm-tools/embedjs-interfaces',
+        '@llm-tools/embedjs-openai',
+        '@llm-tools/embedjs-loader-web',
+        '@llm-tools/embedjs-loader-markdown',
+        '@llm-tools/embedjs-loader-msoffice',
+        '@llm-tools/embedjs-loader-xml',
+        '@llm-tools/embedjs-loader-pdf',
+        '@llm-tools/embedjs-loader-sitemap',
+        '@llm-tools/embedjs-libsql',
+        '@llm-tools/embedjs-loader-image',
+        '@llm-tools/embedjs-utils',
+        '@llm-tools/embedjs-loader-csv'
+      ]
     }
   }
 })

@@ -131,6 +131,7 @@ const knowledgeSlice = createSlice({
         progress?: number
         error?: string
         retryCount?: number
+        forceReloadNext?: boolean // Added for clearing the flag
       }>
     ) {
       const base = state.bases.find((b) => b.id === action.payload.baseId)
@@ -141,6 +142,10 @@ const knowledgeSlice = createSlice({
           item.processingProgress = action.payload.progress
           item.processingError = action.payload.error
           item.retryCount = action.payload.retryCount
+          // Update or clear the forceReloadNext flag
+          if (typeof action.payload.forceReloadNext === 'boolean') {
+            item.forceReloadNext = action.payload.forceReloadNext
+          }
         }
       }
     },

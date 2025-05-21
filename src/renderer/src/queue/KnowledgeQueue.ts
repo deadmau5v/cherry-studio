@@ -116,19 +116,27 @@ class KnowledgeQueue {
 
       let result: LoaderReturn | null = null
       let note, content
+      const forceReloadFlag = sourceItem.forceReloadNext || false
 
-      Logger.log(`[KnowledgeQueue] Processing item: ${sourceItem.content}`)
+      Logger.log(`[KnowledgeQueue] Processing item: ${sourceItem.content} with forceReload: ${forceReloadFlag}`)
+
+      // Prepare item for submission, potentially adding content for notes
+      const itemToSubmit = { ...sourceItem }
 
       switch (item.type) {
         case 'note':
           note = await db.knowledge_notes.get(item.id)
           if (note) {
             content = note.content as string
-            result = await window.api.knowledgeBase.add({ base: baseParams, item: { ...sourceItem, content } })
+            // Add content to the item being submitted
+            itemToSubmit.content = content
+            result = await window.api.knowledgeBase.add({ base: baseParams, item: itemToSubmit, forceReload: forceReloadFlag })
+          } else {
+            throw new Error(`[KnowledgeQueue] Note content not found for item ${item.id}`)
           }
           break
         default:
-          result = await window.api.knowledgeBase.add({ base: baseParams, item: sourceItem })
+          result = await window.api.knowledgeBase.add({ base: baseParams, item: itemToSubmit, forceReload: forceReloadFlag })
           break
       }
 
@@ -138,7 +146,8 @@ class KnowledgeQueue {
         updateItemProcessingStatus({
           baseId,
           itemId: item.id,
-          status: 'completed'
+          status: 'completed',
+          forceReloadNext: false // Explicitly clear the flag after processing
         })
       )
 
@@ -163,7 +172,8 @@ class KnowledgeQueue {
           itemId: item.id,
           status: 'failed',
           error: error instanceof Error ? error.message : 'Unknown error',
-          retryCount: (item.retryCount || 0) + 1
+          retryCount: (item.retryCount || 0) + 1,
+          forceReloadNext: false // Explicitly clear the flag on failure as well
         })
       )
     }

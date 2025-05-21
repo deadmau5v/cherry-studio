@@ -169,21 +169,29 @@ export const useKnowledge = (baseId: string) => {
         processingStatus: 'pending',
         processingProgress: 0,
         processingError: '',
-        uniqueId: undefined
+        uniqueId: undefined,
+        forceReloadNext: true // Mark for forced reload
       })
       setTimeout(() => KnowledgeQueue.checkAllBases(), 0)
     }
   }
 
   // 更新处理状态
-  const updateItemStatus = (itemId: string, status: ProcessingStatus, progress?: number, error?: string) => {
+  const updateItemStatus = (
+    itemId: string,
+    status: ProcessingStatus,
+    progress?: number,
+    error?: string,
+    forceReloadNextValue?: boolean // To explicitly set/clear the flag
+  ) => {
     dispatch(
       updateItemProcessingStatus({
         baseId,
         itemId,
         status,
         progress,
-        error
+        error,
+        forceReloadNext: forceReloadNextValue // Pass this to the action
       })
     )
   }

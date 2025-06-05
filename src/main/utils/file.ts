@@ -1,4 +1,6 @@
+import * as crypto from 'crypto';
 import * as fs from 'node:fs'
+import { readFile } from 'fs/promises';
 import os from 'node:os'
 import path from 'node:path'
 
@@ -95,5 +97,24 @@ export function setUserDataDir() {
     if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) {
       app.setPath('userData', dir)
     }
+  }
+}
+
+/**
+ * Calculates the SHA256 hash of a file's content.
+ * @param filePath The path to the file.
+ * @returns A promise that resolves with the SHA256 hash of the file, or rejects with an error.
+ */
+export async function calculateFileHash(filePath: string): Promise<string> {
+  try {
+    const fileBuffer = await readFile(filePath);
+    const hashSum = crypto.createHash('sha256');
+    hashSum.update(fileBuffer);
+    const hexHash = hashSum.digest('hex');
+    return hexHash;
+  } catch (error) {
+    // Rethrow the error or handle it as needed
+    console.error(`Error calculating hash for file ${filePath}:`, error);
+    throw error;
   }
 }
